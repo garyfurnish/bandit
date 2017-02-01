@@ -68,6 +68,7 @@ namespace bandit { namespace detail {
         INFO,
         SPEC,
         DOTS,
+        CRASH,
         UNKNOWN
       };
 
@@ -75,6 +76,7 @@ namespace bandit { namespace detail {
         static const argstrs<reporters> reporter_list()
         {
           return {
+            { reporters::CRASH, "crash" },
             { reporters::DOTS, "dots" },
             { reporters::SINGLELINE, "singleline" },
             { reporters::XUNIT, "xunit" },
