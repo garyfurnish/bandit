@@ -18,13 +18,14 @@ namespace bandit {
     detail::bandit_context ctxt(desc, hard_skip);
 
     context_stack.push_back(&ctxt);
-    try
-    {
+    if (break_on_failure() == on) {
       func();
-    }
-    catch(const bandit::detail::test_run_error& error)
-    {
-      listener.test_run_error(desc, error);
+    } else {
+      try {
+        func();
+      } catch (const bandit::detail::test_run_error& error) {
+        listener.test_run_error(desc, error);
+      }
     }
 
     context_stack.pop_back();
@@ -123,6 +124,11 @@ namespace bandit {
         listener.it_unknown_error(desc);
         run_policy.encountered_failure();
       }
+    };
+    if (break_on_failure() == on) {
+      try_with_adapter = [&](detail::voidfunc_t do_it) {
+        do_it();
+      };
     };
 
     bool success = false;

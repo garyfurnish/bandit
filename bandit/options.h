@@ -277,8 +277,8 @@ namespace bandit { namespace detail {
             "  --skip=<substring>, \tskip all 'describe' and 'it' containing substring" },
           { ONLY, 0, "", "only", argument::Required,
             "  --only=<substring>, \tonly run 'describe' and 'it' containing substring" },
-          { BREAK_ON_FAILURE, 0, "", "break-on-failure", argument::None,
-            "  --break-on-failure, \tstop test run on first failing test" },
+          { BREAK_ON_FAILURE, 0, "", "break-on-failure", option::Arg::Optional,
+             "  --break-on-failure=<mode>, \tif catch, stop test run on first failing test\nif on, do not catch exceptions"},
           { DRY_RUN, 0, "", "dry-run", argument::None,
             "  --dry-run, \tdon't run tests, just list progress."
             "Use to list available tests" },
